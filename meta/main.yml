@@ -1,0 +1,13 @@
+galaxy_info:
+  author: sre@dreamteam.gg
+  description: Role for VictoriaMetrics
+  company: Dreamteam
+  license: BSD
+  min_ansible_version: 2.4
+  galaxy_tags: []
+  platforms:
+  - name: Debian
+    versions:
+    - 9
+dependencies: []
+

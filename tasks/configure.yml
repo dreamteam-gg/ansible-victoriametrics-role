@@ -1,0 +1,10 @@
+---
+- name: Copy VictoriaMetrics systemd unit file
+  template:
+    src: victoriametrics.service.j2
+    dest: /etc/systemd/system/victoriametrics.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart VictoriaMetrics service
+  no_log: True

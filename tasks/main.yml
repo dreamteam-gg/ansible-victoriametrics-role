@@ -1,0 +1,13 @@
+---
+# tasks file for VictoriaMetrics
+- import_tasks: preinstall.yml
+- import_tasks: install.yml
+- import_tasks: configure.yml
+
+- name: Ensure VictoriaMetrics service is enabled on boot
+  become: true
+  systemd:
+    daemon_reload: true
+    name: victoriametrics
+    enabled: true
+    state: started

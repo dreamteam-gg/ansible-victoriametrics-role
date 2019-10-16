@@ -1,0 +1,42 @@
+---
+- name: Create VictoriaMetrics system group
+  group:
+    name: "{{ victoriametrics_system_group }}"
+    state: present
+    system: true
+  when: victoriametrics_system_group != "root"
+
+- name: Create VictoriaMetrics system user
+  user:
+    name: "{{ victoriametrics_system_user }}"
+    groups: "{{ victoriametrics_system_group }}"
+    append: true
+    shell: /usr/sbin/nologin
+    system: true
+    createhome: false
+  when: victoriametrics_system_user != "root"
+
+- name: Ensure existense of /usr/local/bin
+  file:
+    path: /usr/local/bin
+    state: directory
+    mode: 0755
+
+- name: Ensure existense of VictoriaMetrics storage directory
+  file:
+    path: "{{ victoriametrics_data_dir }}"
+    state: directory
+    mode: 0755
+    owner: "{{ victoriametrics_system_user }}"
+    group: "{{ victoriametrics_system_group }}"
+
+- name: Download and unarchive VictoriaMetrics release binary
+  unarchive:
+    src: "{{ victoriametrics_download_url }}"
+    dest: /usr/local/bin
+    mode: 0750
+    owner: "{{ victoriametrics_system_user }}"
+    group: "{{ victoriametrics_system_group }}"
+    remote_src: yes
+  notify: Restart VictoriaMetrics service
+  when: not ansible_check_mode

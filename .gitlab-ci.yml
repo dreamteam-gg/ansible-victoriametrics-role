@@ -1,0 +1,4 @@
+include:
+  - project: "public-group/gitlab-shared-pipelines"
+    ref: master
+    file: "/gitlab-ansible-tests.yml"

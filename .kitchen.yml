@@ -1,0 +1,25 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  hosts: test-kitchen
+  name: ansible_playbook
+  ansible_connection: ssh
+  require_chef_for_busser: false
+  require_ruby_for_busser: false
+  ansible_version: 2.7.10-1ppa~trusty
+  ansible_host_key_checking: false
+  ansible_verbosity: 2
+  ansible_verbose: true
+  playbook: tests/playbook.yml
+
+platforms:
+  - name: debian/stretch64-9.6
+    driver:
+      box: debian/stretch64
+      box_version: 9.6
+
+suites:
+  - name: default
+
