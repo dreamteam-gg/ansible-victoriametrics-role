@@ -13,3 +13,18 @@
 - name: Set systemd version fact
   set_fact:
     victoriametrics_systemd_version: "{{ __systemd_version.stdout_lines[0].split(' ')[-1] }}"
+
+- name: Check if VictoriaMetrics is installed
+  stat:
+    path: /usr/local/bin/victoria-metrics-prod
+  changed_when: false
+  check_mode: false
+  register: victoriametrics_is_installed
+
+- name: Check current VictoriaMetrics version
+  command: /usr/local/bin/victoria-metrics-prod --version
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  register: victoriametrics_current_version
+  when: victoriametrics_is_installed.stat.exists == True
