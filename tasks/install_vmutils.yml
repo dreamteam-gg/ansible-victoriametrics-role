@@ -1,0 +1,22 @@
+---
+- name: Delete existing VictoriaMetrics vmutils version if it's different.
+  file:
+    path: /usr/local/bin/vm*
+    state: absent
+  when:  victoriametrics_is_installed.stat.exists == True and
+         victoriametrics_version not in victoriametrics_current_version.stderr and
+         victoriametrics_install_vmutil == True
+
+- name: Download and unarchive VictoriaMetrics release binary
+  unarchive:
+    src: "{{ victoriametrics_vmutils_download_url }}"
+    dest: /usr/local/bin
+    mode: 0751
+    owner: "{{ victoriametrics_system_user }}"
+    group: "{{ victoriametrics_system_group }}"
+    remote_src: yes
+  when:
+    - not ansible_check_mode
+    - victoriametrics_is_installed.stat.exists == False or
+      victoriametrics_version not in victoriametrics_current_version.stderr and
+      victoriametrics_install_vmutil == True
