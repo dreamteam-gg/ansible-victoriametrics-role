@@ -2,6 +2,7 @@
 # defaults file for VictoriaMetrics
 victoriametrics_repo_url: "https://github.com/VictoriaMetrics/VictoriaMetrics"
 victoriametrics_download_url:  "{{ victoriametrics_repo_url }}/releases/download/{{ victoriametrics_version }}/victoria-metrics-{{ victoriametrics_version }}.tar.gz"
+victoriametrics_vmutils_download_url: "{{ victoriametrics_repo_url }}/releases/download/{{ victoriametrics_version }}/vmutils-{{ victoriametrics_version }}.tar.gz"
 victoriametrics_version: "v1.28.0"
 victoriametrics_system_user: "victoriametrics"
 victoriametrics_system_group: "{{ victoriametrics_system_user }}"
@@ -9,3 +10,4 @@ victoriametrics_data_dir: "/var/lib/victoria-metrics/"
 victoriametrics_service_args:
   storageDataPath: "{{ victoriametrics_data_dir }}"
 victoriametrics_max_open_files: 2097152
+victoriametrics_install_vmutil: false
