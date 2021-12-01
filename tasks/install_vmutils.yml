@@ -7,7 +7,7 @@
          victoriametrics_version not in victoriametrics_current_version.stderr and
          victoriametrics_install_vmutil == True
 
-- name: Download and unarchive VictoriaMetrics release binary
+- name: Download and unarchive VictoriaMetrics vmutils release binary
   unarchive:
     src: "{{ victoriametrics_vmutils_download_url }}"
     dest: /usr/local/bin
