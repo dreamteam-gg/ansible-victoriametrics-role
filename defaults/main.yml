@@ -9,6 +9,8 @@ victoriametrics_system_user: "victoriametrics"
 victoriametrics_system_group: "{{ victoriametrics_system_user }}"
 victoriametrics_data_dir: "/var/lib/victoria-metrics/"
 victoriametrics_service_args:
-  storageDataPath: "{{ victoriametrics_data_dir }}"
+  storageDataPath: "{{ victoriametrics_data_dir }}" # default retentionPeriod is 1 months
+victoriametrics_service_flags:
+ disable_cache: "search.disableCache" # useful during data backfilling
 victoriametrics_max_open_files: 2097152
 victoriametrics_install_vmutil: false
