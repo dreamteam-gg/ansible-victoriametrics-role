@@ -7,4 +7,4 @@
     group: root
     mode: 0644
   notify: Restart VictoriaMetrics service
-  no_log: True
+  no_log: False
